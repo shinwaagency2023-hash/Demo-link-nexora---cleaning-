@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nexora Clean – Pricing &amp; Profit Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5fb;--card:#fff;--ink:#17101f;--mute:#6b6277;--line:#e4def0;--acc:#7c3aed;--acc2:#25123d;--good:#0f7b5a;--bad:#b4233a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09090d;--card:#17101f;--ink:#fff;--mute:#a79db6;--line:#2c2140;--acc:#a855f7;--acc2:#c084fc;--good:#4ade80;--bad:#fb7185;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#09090d;--card:#17101f;--ink:#fff;--mute:#a79db6;--line:#2c2140;--acc:#a855f7;--acc2:#c084fc;--good:#4ade80;--bad:#fb7185;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Instrument Sans",system-ui,sans-serif}
+main{max-width:920px;margin:0 auto;padding:28px 18px 56px}
+h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+h1{font-size:clamp(30px,6vw,46px);font-weight:800}h2{font-size:22px;font-weight:600;margin-bottom:14px}
+.lead{color:var(--mute);max-width:560px;margin:10px 0 28px}
+.grid{display:grid;gap:18px;grid-template-columns:1fr}@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+label{display:block;font-size:14px;color:var(--mute);margin:12px 0 4px}
+input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit}
+input:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.out{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)}
+.out:last-child{border:0}.big{font-family:"Bricolage Grotesque",sans-serif;font-size:34px;font-weight:800;color:var(--acc)}
+.good{color:var(--good)}.bad{color:var(--bad)}
+.note{font-size:13px;color:var(--mute);margin-top:30px}
+.wide{margin-top:18px}
+</style>
+</head>
+<body>
+<main>
+<h1>Nexora Clean pricing &amp; profit toolkit</h1>
+<p class="lead">Work out what to charge for a cleaning job, then see what a month of jobs earns after your fixed costs. All amounts in rand (R).</p>
+
+<div class="grid">
+<section class="card" aria-labelledby="h-job">
+<h2 id="h-job">1. Price a job</h2>
+<div class="row"><div><label for="cl">Cleaners</label><input id="cl" type="number" min="1" value="2"></div>
+<div><label for="hr">Hours on site</label><input id="hr" type="number" min="0.5" step="0.5" value="4"></div></div>
+<label for="wg">Pay per cleaner per hour (R)</label><input id="wg" type="number" min="0" value="45">
+<div class="row"><div><label for="su">Supplies (R)</label><input id="su" type="number" min="0" value="80"></div>
+<div><label for="tr">Travel (R)</label><input id="tr" type="number" min="0" value="60"></div></div>
+<div class="row"><div><label for="oh">Overhead (%)</label><input id="oh" type="number" min="0" value="10"></div>
+<div><label for="mg">Target profit margin (%)</label><input id="mg" type="number" min="0" max="90" value="30"></div></div>
+</section>
+<section class="card" aria-live="polite">
+<h2>Your quote</h2>
+<p class="big" id="price">R0</p>
+<div class="out"><span>Labour</span><b id="o-lab"></b></div>
+<div class="out"><span>Supplies + travel</span><b id="o-sup"></b></div>
+<div class="out"><span>Overhead</span><b id="o-oh"></b></div>
+<div class="out"><span>Total cost</span><b id="o-cost"></b></div>
+<div class="out"><span>Profit on this job</span><b id="o-prof" class="good"></b></div>
+<div class="out"><span>Profit per hour on site</span><b id="o-ph"></b></div>
+</section>
+</div>
+
+<div class="grid wide">
+<section class="card" aria-labelledby="h-m">
+<h2 id="h-m">2. A month of jobs</h2>
+<p style="color:var(--mute);margin:0 0 4px;font-size:14px">Uses the quote and cost from above for each job.</p>
+<label for="jb">Jobs per month</label><input id="jb" type="number" min="0" value="30">
+<label for="fx">Fixed monthly costs (R): rent, insurance, software, admin pay</label><input id="fx" type="number" min="0" value="6000">
+</section>
+<section class="card" aria-live="polite">
+<h2>Monthly result</h2>
+<div class="out"><span>Revenue</span><b id="m-rev"></b></div>
+<div class="out"><span>Job costs</span><b id="m-cost"></b></div>
+<div class="out"><span>Fixed costs</span><b id="m-fx"></b></div>
+<div class="out"><span>Profit after all costs</span><b id="m-prof"></b></div>
+<div class="out"><span>Jobs needed to break even</span><b id="m-be"></b></div>
+</section>
+</div>
+<p class="note">Demo with example figures. Quotes are estimates based only on what you enter; check them against your own costs.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id),n=id=>Math.max(0,parseFloat($(id).value)||0);
+const R=v=>(v<0?"−R":"R")+Math.abs(Math.round(v)).toLocaleString("en-ZA");
+function calc(){
+const lab=n("cl")*n("hr")*n("wg"),sup=n("su")+n("tr"),direct=lab+sup,oh=direct*n("oh")/100,cost=direct+oh;
+const mg=Math.min(n("mg"),90)/100,price=cost/(1-mg),prof=price-cost,hrs=n("cl")*n("hr");
+$("price").textContent=R(price);$("o-lab").textContent=R(lab);$("o-sup").textContent=R(sup);$("o-oh").textContent=R(oh);
+$("o-cost").textContent=R(cost);$("o-prof").textContent=R(prof);$("o-ph").textContent=n("hr")?R(prof/n("hr")):"–";
+const j=n("jb"),rev=j*price,jc=j*cost,fx=n("fx"),mp=rev-jc-fx;
+$("m-rev").textContent=R(rev);$("m-cost").textContent=R(jc);$("m-fx").textContent=R(fx);
+const e=$("m-prof");e.textContent=R(mp);e.className=mp>=0?"good":"bad";
+$("m-be").textContent=prof>0?Math.ceil(fx/prof)+" jobs":"–";}
+document.querySelectorAll("input").forEach(i=>i.addEventListener("input",calc));calc();
+</script>
+</body>
+</html>
